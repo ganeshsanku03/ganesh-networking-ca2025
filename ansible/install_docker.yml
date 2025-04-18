@@ -1,0 +1,21 @@
+---
+- name: Install Docker on EC2
+  hosts: webserver
+  become: true
+
+  tasks:
+    - name: Update packages
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Install Docker
+      yum:
+        name: docker
+        state: present
+
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: true
