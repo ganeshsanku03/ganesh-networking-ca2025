@@ -2,7 +2,8 @@ name: Docker CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
@@ -12,12 +13,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
       - name: Build Docker Image
         run: |
           cd docker-sample-app
+          ls -la
           docker build -t ganesh-web-app .
-
-      # Optional: push to Docker Hub or trigger SSH to EC2 (advanced)
